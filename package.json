@@ -1,0 +1,24 @@
+{
+  "name": "stylish",
+  "version": "1.0.0",
+  "description": "Digital store-front for STYLiSH",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Linvay/STYLiSH.git"
+  },
+  "author": "Ben Lin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Linvay/STYLiSH/issues"
+  },
+  "homepage": "https://github.com/Linvay/STYLiSH#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3"
+  }
+}
