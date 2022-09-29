@@ -14,7 +14,7 @@ router.get('/all', async function(req, res, next) {
 
 router.get('/women', async function(req, res, next) {
     try {
-        res.json(await programmingLanguages.getMultipleWhere(req.query.page, "women"));
+        res.json(await programmingLanguages.getMultipleWhere(req.query.page, "w"));
     } catch (err) {
         console.error(`Error while getting programming languages`, err);
         next(err);
@@ -23,7 +23,7 @@ router.get('/women', async function(req, res, next) {
 
 router.get('/man', async function(req, res, next) {
     try {
-        res.json(await programmingLanguages.getMultipleWhere(req.query.page, "men"));
+        res.json(await programmingLanguages.getMultipleWhere(req.query.page, "m"));
     } catch (err) {
         console.error(`Error while getting programming languages`, err);
         next(err);
@@ -32,7 +32,7 @@ router.get('/man', async function(req, res, next) {
 
 router.get('/accessories', async function(req, res, next) {
     try {
-        res.json(await programmingLanguages.getMultipleWhere(req.query.page, "acc"));
+        res.json(await programmingLanguages.getMultipleWhere(req.query.page, "a"));
     } catch (err) {
         console.error(`Error while getting programming languages`, err);
         next(err);

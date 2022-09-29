@@ -5,12 +5,14 @@ const config = require("../config");
 async function getMultiple(page = 1) {
     const offset = helper.getOffset(page, config.listPerPage);
     const rows = await db.query(`
-        SELECT *
-        FROM product
-        LIMIT ${offset}, ${config.listPerPage}
-    `);
+        SELECT * 
+        FROM product 
+        NATURAL JOIN variant
+        LIMIT ${offset}, ${config.listPerPage}`
+    );
+    
     const data = helper.emptyOrRows(rows);
-    const meta = {page};
+    const meta = {next_paging: parseInt(page) + 1};
 
     return {
         data,
@@ -23,11 +25,12 @@ async function getMultipleWhere(page = 1, category) {
     const rows = await db.query(`
         SELECT *
         FROM product
-        WHERE category = ${category}
+        NATURAL JOIN variant
+        WHERE category = '${category}'
         LIMIT ${offset}, ${config.listPerPage}
     `);
     const data = helper.emptyOrRows(rows);
-    const meta = {page};
+    const meta = {next_paging: parseInt(page) + 1};
 
     return {
         data,
@@ -36,5 +39,6 @@ async function getMultipleWhere(page = 1, category) {
 }
 
 module.exports = {
-    getMultiple
+    getMultiple,
+    getMultipleWhere
 }

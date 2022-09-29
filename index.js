@@ -1,4 +1,5 @@
 const express = require("express");
+const { db } = require("./config");
 const app = express();
 const port = 3000;
 const programmingLanguagesRouter = require("./routes/programmingLanguages");
