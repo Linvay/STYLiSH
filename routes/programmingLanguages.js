@@ -21,7 +21,7 @@ router.get('/women', async function(req, res, next) {
     }
 });
 
-router.get('/man', async function(req, res, next) {
+router.get('/men', async function(req, res, next) {
     try {
         res.json(await programmingLanguages.getMultipleWhere(req.query.page, "m"));
     } catch (err) {
