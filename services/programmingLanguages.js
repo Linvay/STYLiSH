@@ -2,7 +2,7 @@ const db = require("./db");
 const helper = require("../helper");
 const config = require("../config");
 
-async function getMultiple(page = 1) {
+async function getMultiple(page = 0) {
     const offset = helper.getOffset(page, config.listPerPage);
     const rows = await db.query(`
         SELECT * 
@@ -20,7 +20,7 @@ async function getMultiple(page = 1) {
     }
 }
 
-async function getMultipleWhere(page = 1, category) {
+async function getMultipleWhere(page = 0, category) {
     const offset = helper.getOffset(page, config.listPerPage);
     const rows = await db.query(`
         SELECT *
