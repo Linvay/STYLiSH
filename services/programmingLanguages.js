@@ -7,7 +7,7 @@ async function getMultiple(page = 0) {
     const offset = helper.getOffset(page, config.listPerPage);
     const rows = await db.query(`
         SELECT * 
-        FROM product 
+        FROM product
         NATURAL JOIN variant
         LIMIT ${offset}, ${config.listPerPage + 1}`
     );
@@ -29,9 +29,9 @@ async function getMultipleWhere(page = 0, category) {
         SELECT *
         FROM product
         NATURAL JOIN variant
-        WHERE category = '${category}'
-        LIMIT ${offset}, ${config.listPerPage + 1}
-    `);
+        WHERE category = ?
+        LIMIT ${offset}, ?
+    `, [category, (config.listPerPage + 1).toString()]);
     const data = helper.emptyOrRows(rows);
 
     /* Check if next page is empty */
@@ -46,16 +46,17 @@ async function getMultipleWhere(page = 0, category) {
 
 async function getMultipleByKeyword(page = 0, keyword) {
     const offset = helper.getOffset(page, config.listPerPage);
+    
     const rows = await db.query(`
         SELECT *
         FROM (
             SELECT *
             FROM product
-            WHERE name LIKE '%${keyword}%'
+            WHERE name LIKE CONCAT('%', ?, '%')
         ) AS p
         NATURAL JOIN variant
-        LIMIT ${offset}, ${config.listPerPage + 1}
-    `);
+        LIMIT ${offset}, ?`
+    , [keyword, (config.listPerPage + 1).toString()]);
     const data = helper.emptyOrRows(rows);
     
     /* Check if next page is empty */
@@ -68,8 +69,20 @@ async function getMultipleByKeyword(page = 0, keyword) {
     }
 }
 
+async function getDetailByID(prod_id) {    
+    const rows = await db.query(`
+        SELECT *
+        FROM detail
+        WHERE prod_id = ${prod_id}
+    `);
+    const data = helper.emptyOrRows(rows);
+    
+    return {data}
+}
+
 module.exports = {
     getMultiple,
     getMultipleWhere,
-    getMultipleByKeyword
+    getMultipleByKeyword,
+    getDetailByID
 }

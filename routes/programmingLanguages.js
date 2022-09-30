@@ -48,4 +48,13 @@ router.get('/search', async function(req, res, next) {
     }
 });
 
+router.get('/detail', async function(req, res, next) {
+    try {
+        res.json(await programmingLanguages.getDetailByID(req.query.id));
+    } catch (err) {
+        console.error(`Error while getting programming languages`, err);
+        next(err);
+    }
+});
+
 module.exports = router;
