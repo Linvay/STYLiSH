@@ -69,15 +69,45 @@ async function getMultipleByKeyword(page = 0, keyword) {
     }
 }
 
-async function getDetailByID(prod_id) {    
-    const rows = await db.query(`
+async function getDetailByID(prod_id) {
+    /* PRODUCT */    
+    let rows = await db.query(`
         SELECT *
-        FROM detail
-        WHERE prod_id = ${prod_id}
-    `);
-    const data = helper.emptyOrRows(rows);
-    
-    return {data}
+        FROM product
+        WHERE prod_id = ?
+    `, [prod_id]);
+    const product = helper.emptyOrRows(rows)[0];
+
+    /* VARIANT */
+    rows = await db.query(`
+        SELECT var_id, color, size, stock
+        FROM variant
+        WHERE prod_id = ?
+    `, [prod_id]);
+    const variant = helper.emptyOrRows(rows);
+
+    /* DESCRIPTION */
+    rows = await db.query(`
+        SELECT des_id, main, extra
+        FROM description
+        WHERE prod_id = ?
+    `, [prod_id]);
+    const description = helper.emptyOrRows(rows)[0];
+
+    /* DESCRIPTION IMAGE */
+    rows = await db.query(`
+        SELECT img_src
+        FROM des_img
+        WHERE des_id = ?
+    `, [parseInt(description.des_id)]);
+    const des_img = helper.emptyOrRows(rows);
+    description["des_img"] = des_img.map(item => item.img_src);
+
+    return {
+        product, 
+        variant: variant,
+        description: description,
+    }
 }
 
 module.exports = {
