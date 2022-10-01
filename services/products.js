@@ -178,12 +178,12 @@ async function insert(body, files) {
 
         await connection.commit();
         const message = "Product inserted successfully";
-        return {message};
+        return {message: message, prod_id: prod_id};
     } 
     catch (err) {
         const mes = await connection.rollback();
         console.log(mes);
-        return {err};
+        return {err: err};
     }
 }
 
