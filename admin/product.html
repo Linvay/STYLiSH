@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>STYLiSH Product Creation</title>
+        <link rel="stylesheet" href="product.css" />
+    </head>
+    <body>
+        <form action="/api/1/products/create" method="POST", enctype="multipart/form-data">
+            <fieldset class="prod_info">
+                <legend>商品資訊</legend>
+                <label for="prod_name">商品名稱：</label>
+                <input type="text" id="prod_name", name="prod_name" required> <br>
+                <label for="prod_price">商品價格：</label>
+                <input type="text" id="prod_price" name="prod_price" required> <br>
+
+                <label>商品種類：</label>
+                <input type="radio" id="prod_category" name="prod_category" value="w" required>
+                <label for="prod_category">女裝</label>
+                <input type="radio" id="prod_category" name="prod_category" value="m" required>
+                <label for="prod_category">男裝</label>
+                <input type="radio" id="prod_category" name="prod_category" value="a" required>
+                <label for="prod_category">飾品</label> <br>
+            </fieldset>
+            <fieldset>
+                <legend>款式資訊</legend>
+                <button type="button" id="var_adder">新增款式</button>
+                <div class="container">
+                    <div class="var_input">
+                        <label>款式顏色：
+                            <input type="color" name="var_color" value="#000000" required> <br>
+                        </label>
+                        <label for="var_size">款式尺寸：
+                            <select id="var_size" name="var_size" required>
+                                <option value="">（請選擇尺寸）</option>
+                                <option value="S">S</option>
+                                <option value="M">M</option>
+                                <option value="L">L</option>
+                            </select> <br>
+                        </label>
+                        <label>款式存貨：
+                            <input name="var_stock" required> <br>
+                        </label>
+                        <label>商品照片：
+                            <input type="file" name="var_img" required> <br>
+                        </label>
+                        <button type="button" class="delete_input">刪除</button>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>商品介紹</legend>
+                <label for="prod_desc">商品簡介：</label> <br>
+                <textarea rows="5" cols="50" name="des_main" id="prod_desc" placeholder="請輸入文字..."></textarea> <br>
+                <label for="prod_extra">額外內容：</label> <br>
+                <textarea rows="5" cols="50" name="des_extra" id="prod_extra" placeholder="請輸入文字..."></textarea> <br>
+                <label>額外照片：
+                    <input type="file" name="des_img" multiple> <br>
+                </label>
+            </fieldset>
+            <input type="submit" value="新增商品">
+        </form>
+        
+        <script>
+            const btn_delete = document.querySelector(".delete_input");
+            btn_delete.addEventListener("click", () => {
+                btns = document.querySelectorAll(".delete_input");
+                if (btns.length > 1) {
+                    console.log("HI")
+                    btn_delete.parentElement.remove();
+                }
+            });
+
+            function addVariantInput() {
+                const var_input = document.querySelector(".var_input")
+                const new_var_input = var_input.cloneNode(true);
+
+                const inputs = new_var_input.querySelectorAll("input");
+                for (elem of inputs) {
+                    elem.value = "";
+                }
+
+                const container = document.querySelector(".container");
+                container.appendChild(new_var_input);
+
+                const btn_delete = document.getElementsByClassName("delete_input");
+                btn_delete[btn_delete.length - 1].addEventListener("click", () => {
+                    new_var_input.remove();
+                });
+            }
+
+            const var_adder = document.querySelector("#var_adder");
+            var_adder.addEventListener("click", addVariantInput);
+        </script>
+    </body>
+</html>

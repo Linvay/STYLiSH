@@ -29,7 +29,7 @@ CREATE TABLE `des_img` (
   PRIMARY KEY (`img_id`),
   KEY `des_id` (`des_id`),
   CONSTRAINT `des_img_ibfk_1` FOREIGN KEY (`des_id`) REFERENCES `description` (`des_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `des_img` (
 
 LOCK TABLES `des_img` WRITE;
 /*!40000 ALTER TABLE `des_img` DISABLE KEYS */;
-INSERT INTO `des_img` VALUES (1,1,'https://s3-alpha-sig.figma.com/img/170f/5323/f3fc1f9902db2bca2704a9323720b320?Expires=1665360000&Signature=Fao2m6UTjt4M8seFhX159km4MyRa1RZbB7T1r8imXcIAsYk~PBI6lmHApEDlMDNmHtwAbxTQO8UfWAqUqme1w9l7MDCVg1MEEEbGwKYy8Cwrp1bwS~YE9~RmoISuCd-BoZMtbw3v3YLG5pTnEL--3WXvDTAaPDqxxQxcmjj8jf5TpDP9d56OQskpfLJt2fllyG6LjT5Ca9jvmkYwDmjjcs3kr4IX-WfcLeqjx~7ONGWVvBSGQz-H0dqGXjiupyMRFunSDMRv~CjtZ9BwQfGC4AqE9bQHKPO5Mst3MsrALTDmhsdkgseVc-lI~3YfUmO7VUsv00EMBYjCsai2aWRJew__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA'),(2,1,'https://s3-alpha-sig.figma.com/img/a571/64d6/d4eb6bb501df7dcd9e94f8b47a421718?Expires=1665360000&Signature=B5L-3Hf3PiS58GrL0BpcuDNFpN71VguHCnos~gPmKSPProAR4n7WyYtlIHci4VylSVOsCk9M6-JdpkuWI3dRtKNJOukGETeKbLayHfJMT1YW2gut4f0q54fS~6dpJ~MeQD-70lETunudpzSY~rZki7M87z2zWXs2LFuXBO7sJqdDpppAh3E~DAdYNySpO7U7aBN0Ldbby4VT-aNsdN2C1yuNfR85zC1-4y0a1V9V~QmYAxkCSaDtqU9G56gshd1shc~eDci9aEAWlfJgMlgTCYXV3~YDdYFSKLn7RsVLzZf94ZonpYEmkaFCLp2tOUQSCVuMWp2q7XKRqd3BjTncxA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA'),(3,2,'https://justonemall.tw/web/product/shopping_mall/product/2209/DA26181/LJ-220914DA26181_00.jpg'),(4,2,'https://justonemall.tw/web/product/shopping_mall/product/2209/DA26181/LJ-220914DA26181_m_tw.jpg'),(5,3,'https://justonemall.tw/web/product/shopping_mall/product/2108/DA23677/SJ-210819DA23677_02.jpg'),(6,3,'https://justonemall.tw/web/product/shopping_mall/product/2108/DA23677/SJ-210819DA23677_m_tw_05.jpg');
+INSERT INTO `des_img` VALUES (1,1,'upload\\images\\簡約素面下擺撞色休閒長袖衛衣_extra.jpg');
 /*!40000 ALTER TABLE `des_img` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -58,7 +58,7 @@ CREATE TABLE `description` (
   KEY `prod_id` (`prod_id`),
   FULLTEXT KEY `body` (`main`,`extra`),
   CONSTRAINT `description_ibfk_1` FOREIGN KEY (`prod_id`) REFERENCES `product` (`prod_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +67,7 @@ CREATE TABLE `description` (
 
 LOCK TABLES `description` WRITE;
 /*!40000 ALTER TABLE `description` DISABLE KEYS */;
-INSERT INTO `description` VALUES (1,10,'實品顏色依單品照為主\n\n棉 100%\n厚薄：薄\n彈性：無\n\n清洗：手洗，溫水\n產地：中國','O.N.S is all about options, which is why we took our staple polo shirt and upgraded it with slubby linen jersey, making it even lighter for those who prefer their summer style extra-breezy.'),(2,11,'純色系的洋裝款式，是好駕馭的優雅單品。\n半排釦的上身設計，方便穿脫又增添造型。\n鬆緊帶的腰部收合，自在地襯托窈窕身形。\n百分百的純棉質感，給肌膚最溫柔的呵護！',''),(3,12,'搭配好的套裝款式，讓妳不用再傷透腦筋。\n無印花的純色上衣，穿搭駕馭不需要技巧。\n抓皺設計的泡泡袖，修飾手臂又滿載甜味。\n側綁帶的背心洋裝，展現巧思更增添美感。',''),(4,11,'純色系的洋裝款式，是好駕馭的優雅單品。\n半排釦的上身設計，方便穿脫又增添造型。\n鬆緊帶的腰部收合，自在地襯托窈窕身形。\n百分百的純棉質感，給肌膚最溫柔的呵護！',''),(5,12,'搭配好的套裝款式，讓妳不用再傷透腦筋。\n無印花的純色上衣，穿搭駕馭不需要技巧。\n抓皺設計的泡泡袖，修飾手臂又滿載甜味。\n側綁帶的背心洋裝，展現巧思更增添美感。','');
+INSERT INTO `description` VALUES (1,1,'小二布屋BOY2【NZ762007】。\r\n質感舒適，休閒百搭。\r\n4色 現+預',''),(10,2,'Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nNulla sagittis turpis sed sapien imperdiet placerat.\nCras malesuada ligula non nisl varius, in fringilla risus egestas.','In vitae sem turpis. Donec sed varius erat. In a aliquam dui. Proin ac lacus felis. Nam vitae pulvinar ante. Sed ullamcorper id velit sit amet mattis. Sed efficitur nibh quis mi sollicitudin, quis fermentum odio mattis. Duis vulputate pharetra arcu, id aliquam quam vulputate sed. Curabitur velit elit, commodo eu dignissim at, tristique non justo.'),(11,3,'Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nNulla sagittis turpis sed sapien imperdiet placerat.\nCras malesuada ligula non nisl varius, in fringilla risus egestas.','In vitae sem turpis. Donec sed varius erat. In a aliquam dui. Proin ac lacus felis. Nam vitae pulvinar ante. Sed ullamcorper id velit sit amet mattis. Sed efficitur nibh quis mi sollicitudin, quis fermentum odio mattis. Duis vulputate pharetra arcu, id aliquam quam vulputate sed. Curabitur velit elit, commodo eu dignissim at, tristique non justo.'),(12,4,'Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nNulla sagittis turpis sed sapien imperdiet placerat.\nCras malesuada ligula non nisl varius, in fringilla risus egestas.','In vitae sem turpis. Donec sed varius erat. In a aliquam dui. Proin ac lacus felis. Nam vitae pulvinar ante. Sed ullamcorper id velit sit amet mattis. Sed efficitur nibh quis mi sollicitudin, quis fermentum odio mattis. Duis vulputate pharetra arcu, id aliquam quam vulputate sed. Curabitur velit elit, commodo eu dignissim at, tristique non justo.'),(13,5,'Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nNulla sagittis turpis sed sapien imperdiet placerat.\nCras malesuada ligula non nisl varius, in fringilla risus egestas.','In vitae sem turpis. Donec sed varius erat. In a aliquam dui. Proin ac lacus felis. Nam vitae pulvinar ante. Sed ullamcorper id velit sit amet mattis. Sed efficitur nibh quis mi sollicitudin, quis fermentum odio mattis. Duis vulputate pharetra arcu, id aliquam quam vulputate sed. Curabitur velit elit, commodo eu dignissim at, tristique non justo.'),(14,6,'Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nNulla sagittis turpis sed sapien imperdiet placerat.\nCras malesuada ligula non nisl varius, in fringilla risus egestas.','In vitae sem turpis. Donec sed varius erat. In a aliquam dui. Proin ac lacus felis. Nam vitae pulvinar ante. Sed ullamcorper id velit sit amet mattis. Sed efficitur nibh quis mi sollicitudin, quis fermentum odio mattis. Duis vulputate pharetra arcu, id aliquam quam vulputate sed. Curabitur velit elit, commodo eu dignissim at, tristique non justo.'),(15,7,'Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nNulla sagittis turpis sed sapien imperdiet placerat.\nCras malesuada ligula non nisl varius, in fringilla risus egestas.','In vitae sem turpis. Donec sed varius erat. In a aliquam dui. Proin ac lacus felis. Nam vitae pulvinar ante. Sed ullamcorper id velit sit amet mattis. Sed efficitur nibh quis mi sollicitudin, quis fermentum odio mattis. Duis vulputate pharetra arcu, id aliquam quam vulputate sed. Curabitur velit elit, commodo eu dignissim at, tristique non justo.'),(16,8,'Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nNulla sagittis turpis sed sapien imperdiet placerat.\nCras malesuada ligula non nisl varius, in fringilla risus egestas.','In vitae sem turpis. Donec sed varius erat. In a aliquam dui. Proin ac lacus felis. Nam vitae pulvinar ante. Sed ullamcorper id velit sit amet mattis. Sed efficitur nibh quis mi sollicitudin, quis fermentum odio mattis. Duis vulputate pharetra arcu, id aliquam quam vulputate sed. Curabitur velit elit, commodo eu dignissim at, tristique non justo.'),(17,9,'Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nNulla sagittis turpis sed sapien imperdiet placerat.\nCras malesuada ligula non nisl varius, in fringilla risus egestas.','In vitae sem turpis. Donec sed varius erat. In a aliquam dui. Proin ac lacus felis. Nam vitae pulvinar ante. Sed ullamcorper id velit sit amet mattis. Sed efficitur nibh quis mi sollicitudin, quis fermentum odio mattis. Duis vulputate pharetra arcu, id aliquam quam vulputate sed. Curabitur velit elit, commodo eu dignissim at, tristique non justo.');
 /*!40000 ALTER TABLE `description` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -83,9 +83,8 @@ CREATE TABLE `product` (
   `name` varchar(255) NOT NULL,
   `price` int unsigned NOT NULL,
   `category` varchar(15) NOT NULL,
-  `img_src` varchar(2000) NOT NULL,
   PRIMARY KEY (`prod_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -94,7 +93,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (1,'mc_1',300,'m','shorturl.at/joTY6'),(2,'wc_1',350,'w','shorturl.at/joTY6'),(3,'wc_2',410,'w','shorturl.at/joTY6'),(4,'wc_3',420,'w','shorturl.at/joTY6'),(5,'wc_4',420,'w','shorturl.at/joTY6'),(6,'wc_5',430,'w','shorturl.at/joTY6'),(7,'wc_6',450,'w','shorturl.at/joTY6'),(8,'wc_7',500,'w','shorturl.at/joTY6'),(9,'acc_1',1000,'a','shorturl.at/joTY6'),(10,'厚實毛呢格子外套',3000,'w','shorturl.at/joTY6'),(11,'鬆緊腰半排釦洋裝',950,'w','https://justonemall.tw/web/product/big/202209/c2e47b27575409162030278c53937d3d.jpg'),(12,'泡泡袖上衣綁帶背心洋裝',950,'w','https://justonemall.tw/web/product/big/202108/0669475c316a4b8c9ce8b518d5b32ba2.jpg');
+INSERT INTO `product` VALUES (1,'簡約素面下擺撞色休閒長袖衛衣',680,'m'),(2,'厚實毛呢格子外套',500,'w'),(3,'泡泡袖上衣綁帶背心洋裝套裝',810,'w'),(4,'半排釦針織背心洋裝',950,'w'),(5,'微笑標籤七分袖條紋大學T',720,'w'),(6,'燒花荷葉邊後釦褶縫上衣',550,'w'),(7,'百褶格紋褲裙',880,'w'),(8,'寬百褶後鬆緊腰長裙',950,'w'),(9,'優雅925銀珍珠耳環',1000,'a');
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -111,10 +110,11 @@ CREATE TABLE `variant` (
   `color` varchar(20) NOT NULL,
   `size` varchar(15) NOT NULL,
   `stock` int unsigned NOT NULL,
+  `img_src` varchar(2083) NOT NULL,
   PRIMARY KEY (`var_id`),
   KEY `prod_id` (`prod_id`),
   CONSTRAINT `variant_ibfk_1` FOREIGN KEY (`prod_id`) REFERENCES `product` (`prod_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,7 +123,7 @@ CREATE TABLE `variant` (
 
 LOCK TABLES `variant` WRITE;
 /*!40000 ALTER TABLE `variant` DISABLE KEYS */;
-INSERT INTO `variant` VALUES (1,1,'#000000','M',10),(2,1,'#0000ff','M',10),(3,2,'#0000ff','S',10),(4,2,'#0000ff','M',10),(5,3,'#ff00ff','XL',10),(6,3,'#0000ff','M',10),(7,3,'#0000ff','L',10),(8,4,'#0000ff','S',10),(9,5,'#0000ff','M',10),(10,5,'#0000ff','XS',10),(11,6,'#0000ff','XL',10),(12,6,'#0000ff','M',10),(13,7,'#0000ff','L',10),(14,7,'#0000ff','M',10),(15,8,'#0000ff','L',10),(16,8,'#0000ff','XS',10),(17,8,'#0000ff','M',10),(18,9,'#0000ff','M',10),(19,9,'#ff00ff','S',10),(20,10,'#333333','M',15),(21,10,'#331133','L',15),(22,11,'#313533','M',5),(23,11,'#316933','S',10),(24,11,'#301033','L',10),(25,12,'#30ff33','M',13),(26,12,'#201933','S',19);
+INSERT INTO `variant` VALUES (1,1,'#ffffff','S',20,'upload\\images\\簡約素面下擺撞色休閒長袖衛衣.jpeg'),(2,1,'#000000','M',18,'upload\\images\\簡約素面下擺撞色休閒長袖衛衣_黑.jpeg'),(21,2,'#4202ad','S',20,''),(22,2,'#6bffd1','M',20,''),(23,3,'#9848bc','S',20,''),(24,3,'#70c752','L',20,''),(25,4,'#4202ad','S',20,''),(26,4,'#101edd','S',20,''),(27,5,'#a974a2','L',20,''),(28,5,'#53a26e','M',20,''),(29,6,'#b4cf08','S',20,''),(30,6,'#4202ad','S',20,''),(31,7,'#c471c3','L',20,''),(32,7,'#101edd','S',20,''),(33,8,'#4202ad','S',20,''),(34,8,'#4202ad','L',20,''),(35,8,'#53a26e','S',20,''),(36,8,'#c471c3','M',20,''),(37,9,'#b4cf08','S',20,''),(38,9,'#70c752','L',20,'');
 /*!40000 ALTER TABLE `variant` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -136,4 +136,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-30 17:52:18
+-- Dump completed on 2022-10-02  2:08:19

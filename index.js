@@ -1,22 +1,24 @@
 const express = require("express");
-const { db } = require("./config");
+const bodyParser = require("body-parser");
+
 const app = express();
 const port = 3000;
-const programmingLanguagesRouter = require("./routes/programmingLanguages");
+const productsRouter = require("./routes/products");
 
 // express
 app.use(express.json());
-app.use(
-    express.urlencoded({
-        extended: true,
-    })
-);
+app.use(express.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-    res.send("ok");
+    res.send("Website is under construction");
 });
 
-app.use('/api/1/products', programmingLanguagesRouter);
+app.use('/api/1/products', productsRouter);
+app.use('/admin', express.static('admin'));
+app.use('/upload/images', express.static('upload/images'));
+
 /* Error handler middleware */
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
