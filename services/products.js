@@ -123,7 +123,7 @@ async function getDetailByID(prod_id) {
         SELECT img_src
         FROM des_img
         WHERE des_id = ?
-    `, [parseInt(description.des_id)]);
+    `, [description.des_id]);
     const des_img = helper.emptyOrRows(rows);
     description["des_img"] = des_img.map(item => item.img_src);
 
@@ -135,6 +135,8 @@ async function getDetailByID(prod_id) {
 }
 
 async function insert(body, files) {
+    console.log(body);
+    console.log(files);
     const connection = await mysql.createConnection(config.db);
     await connection.beginTransaction();
     try {
@@ -144,36 +146,36 @@ async function insert(body, files) {
                 VALUE
                 (?, ?, ?)
             `, [body.prod_name, body.prod_price, body.prod_category]);
-        const prod_id = result.insertId;
-        console.log(result);
-    
-        for (let i = 0; i < body.var_color.length; ++i) {
+        const prod_id = result[0].insertId;
+        
+        for (let i = 0; i < parseInt(body.var_cnt, 10); ++i) {
             result = await connection.query(`
                 INSERT INTO variant
                 (prod_id, color, size, stock, img_src)
                 VALUE
                 (?, ?, ?, ?, ?)
             `, [prod_id, body.var_color[i], body.var_size[i], body.var_stock[i], files.var_img[i].path]);
-            console.log(result);
         }
-    
+        
         result = await connection.query(`
             INSERT INTO description
             (prod_id, main, extra)
             VALUE
             (?, ?, ?)
         `, [prod_id, body.des_main, body.des_extra]);
-        const des_id = result.insertId;
-        console.log(result);
-    
-        for (let i = 0; i < files.des_img.length; ++i) {
-            result = await connection.query(`
-                INSERT INTO des_img
-                (des_id, img_src)
-                VALUE
-                (?, ?)
-            `, [des_id, files.des_img[i].path]);
-            console.log(result);
+        const des_id = result[0].insertId;
+        
+        if (files.des_img && files.des_img.length > 0) {
+            console.log("des_img:", files.des_img, "des_img.length: ", files.des_img.length);
+            for (let i = 0; i < files.des_img.length; ++i) {
+                result = await connection.query(`
+                    INSERT INTO des_img
+                    (des_id, img_src)
+                    VALUE
+                    (?, ?)
+                `, [des_id, files.des_img[i].path]);
+                console.log(result);
+            }
         }
 
         await connection.commit();
@@ -181,9 +183,8 @@ async function insert(body, files) {
         return {message: message, prod_id: prod_id};
     } 
     catch (err) {
-        const mes = await connection.rollback();
-        console.log(mes);
-        return {err: err};
+        await connection.rollback();
+        return err;
     }
 }
 

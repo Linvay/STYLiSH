@@ -59,16 +59,23 @@
                     <input type="file" name="des_img" multiple> <br>
                 </label>
             </fieldset>
-            <input type="submit" value="新增商品">
+            <input type="hidden" name="var_cnt" class="var_cnt" value="10">
+            <input type="submit" value="新增商品" onclick="countVar()">
         </form>
         
         <script>
+            function countVar() {
+                const var_cnt = document.querySelector(".var_cnt");
+                var_cnt.value = (document.querySelectorAll(".var_input").length).toString();
+            }
+
             const btn_delete = document.querySelector(".delete_input");
             btn_delete.addEventListener("click", () => {
                 btns = document.querySelectorAll(".delete_input");
                 if (btns.length > 1) {
                     console.log("HI")
                     btn_delete.parentElement.remove();
+                    
                 }
             });
 
@@ -87,7 +94,10 @@
                 const btn_delete = document.getElementsByClassName("delete_input");
                 btn_delete[btn_delete.length - 1].addEventListener("click", () => {
                     new_var_input.remove();
+                    
                 });
+
+                
             }
 
             const var_adder = document.querySelector("#var_adder");
