@@ -104,7 +104,7 @@ async function getDetailByID(prod_id) {
 
     /* VARIANT */
     rows = await db.query(`
-        SELECT var_id, color, size, stock
+        SELECT var_id, color, size, stock, img_src
         FROM variant
         WHERE prod_id = ?
     `, [prod_id]);
