@@ -9,6 +9,34 @@ const storage = multer.diskStorage({
 const upload = multer({storage: storage});
 const products = require("../services/products");
 
+router.get('/search', async function(req, res, next) {
+    try {
+        res.json(await products.getAllByKeyword(req.query.page, req.query.keyword));
+    } catch (err) {
+        console.error(`Error while getting products by keyword`, err);
+        next(err);
+    }
+});
+
+router.get('/detail', async function(req, res, next) {
+    try {
+        res.json(await products.getDetailByID(req.query.id));
+    } catch (err) {
+        console.error(`Error while getting product detail`, err);
+        next(err);
+    }
+});
+
+const cpUpload = upload.fields([{name: "var_img"}, {name: "des_img"}]);
+router.post('/create', cpUpload, async function(req, res, next) {
+    try {
+        res.json(await products.insert(req.body, req.files));
+    } catch (err) {
+        console.error(`Error while inserting products`, err);
+        next(err);
+    }
+});
+
 router.get('/:category', async function(req, res, next) {
     if (req.params.category == "all") {
         try {
@@ -44,34 +72,6 @@ router.get('/:category', async function(req, res, next) {
     }
     else {
         res.send("Error: no such category");
-    }
-});
-
-router.get('/search', async function(req, res, next) {
-    try {
-        res.json(await products.getAllByKeyword(req.query.page, req.query.keyword));
-    } catch (err) {
-        console.error(`Error while getting products by keyword`, err);
-        next(err);
-    }
-});
-
-router.get('/detail', async function(req, res, next) {
-    try {
-        res.json(await products.getDetailByID(req.query.id));
-    } catch (err) {
-        console.error(`Error while getting product detail`, err);
-        next(err);
-    }
-});
-
-const cpUpload = upload.fields([{name: "var_img"}, {name: "des_img"}]);
-router.post('/create', cpUpload, async function(req, res, next) {
-    try {
-        res.json(await products.insert(req.body, req.files));
-    } catch (err) {
-        console.error(`Error while inserting products`, err);
-        next(err);
     }
 });
 
