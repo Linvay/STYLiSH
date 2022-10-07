@@ -105,3 +105,6 @@ dist
 
 # database config
 config.js
+
+# uploaded images
+upload/
