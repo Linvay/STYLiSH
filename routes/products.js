@@ -9,39 +9,41 @@ const storage = multer.diskStorage({
 const upload = multer({storage: storage});
 const products = require("../services/products");
 
-router.get('/all', async function(req, res, next) {
-    try {
-        res.json(await products.getAll(req.query.page));
-    } catch (err) {
-        console.error(`Error while getting products`, err);
-        next(err);
+router.get('/:category', async function(req, res, next) {
+    if (req.params.category == "all") {
+        try {
+            res.json(await products.getAll(req.query.page));
+        } catch (err) {
+            console.error(`Error while getting products`, err);
+            next(err);
+        }
     }
-});
-
-router.get('/women', async function(req, res, next) {
-    try {
-        res.json(await products.getAllByCategory(req.query.page, "w"));
-    } catch (err) {
-        console.error(`Error while getting women products`, err);
-        next(err);
+    else if (req.params.category == "women") {
+        try {
+            res.json(await products.getAllByCategory(req.query.page, "women"));
+        } catch (err) {
+            console.error(`Error while getting women products`, err);
+            next(err);
+        }
     }
-});
-
-router.get('/men', async function(req, res, next) {
-    try {
-        res.json(await products.getAllByCategory(req.query.page, "m"));
-    } catch (err) {
-        console.error(`Error while getting men products`, err);
-        next(err);
+    else if (req.params.category == "men") {
+        try {
+            res.json(await products.getAllByCategory(req.query.page, "men"));
+        } catch (err) {
+            console.error(`Error while getting men products`, err);
+            next(err);
+        }
     }
-});
-
-router.get('/accessories', async function(req, res, next) {
-    try {
-        res.json(await products.getAllByCategory(req.query.page, "a"));
-    } catch (err) {
-        console.error(`Error while getting accessories`, err);
-        next(err);
+    else if (req.params.category == "accessories") {
+        try {
+            res.json(await products.getAllByCategory(req.query.page, "accessories"));
+        } catch (err) {
+            console.error(`Error while getting accessories products`, err);
+            next(err);
+        }
+    }
+    else {
+        res.send("Error: no such category");
     }
 });
 

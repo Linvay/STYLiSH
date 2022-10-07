@@ -1,9 +1,10 @@
 const db = require("../models");
-const config = require("../config");
 const User = db.user;
 const Op = db.Sequelize.Op;
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+
+require("dotenv").config();
 
 async function singup(req, res) {
     /* Save user to database */
@@ -49,7 +50,7 @@ async function singin(req, res) {
             });
         }
 
-        const token = jwt.sign({id: user.id}, config.jwt.secret, {
+        const token = jwt.sign({id: user.id}, process.env.JWT_SECRET, {
             expiresIn: 86400, // 24 hours
         });
         req.session.token = token;

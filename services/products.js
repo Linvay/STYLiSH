@@ -1,16 +1,17 @@
 const db = require("./db");
 const mysql = require("mysql2/promise")
 const helper = require("../helper");
-const config = require("../config");
+
+require("dotenv").config();
 
 async function getAll(page = 0) {
     /* Query data of current page */
-    const offset = helper.getOffset(page, config.listPerPage);
+    const offset = helper.getOffset(page, process.env.LIST_PER_PAGE);
     let rows = await db.query(`
         SELECT * 
         FROM product
         LIMIT ${offset}, ?
-    `, [(config.listPerPage + 1).toString()]);
+    `, [(process.env.LIST_PER_PAGE + 1).toString()]);
     const data = helper.emptyOrRows(rows);
 
     for (item of data) {
@@ -24,7 +25,7 @@ async function getAll(page = 0) {
     }
 
     /* Check if next page is empty */
-    if (data.length == config.listPerPage + 1) {
+    if (data.length == process.env.LIST_PER_PAGE + 1) {
         data.pop();
         return {data, next_paging: parseInt(page) + 1};
     }
@@ -34,13 +35,13 @@ async function getAll(page = 0) {
 }
 
 async function getAllByCategory(page = 0, category) {
-    const offset = helper.getOffset(page, config.listPerPage);
+    const offset = helper.getOffset(page, process.env.LIST_PER_PAGE);
     let rows = await db.query(`
         SELECT *
         FROM product
         WHERE category = ?
         LIMIT ${offset}, ?
-    `, [category, (config.listPerPage + 1).toString()]);
+    `, [category, (process.env.LIST_PER_PAGE + 1).toString()]);
     const data = helper.emptyOrRows(rows);
 
     for (item of data) {
@@ -54,7 +55,7 @@ async function getAllByCategory(page = 0, category) {
     }
 
     /* Check if next page is empty */
-    if (data.length == config.listPerPage + 1) {
+    if (data.length == process.env.LIST_PER_PAGE + 1) {
         data.pop();
         return {data, next_paging: parseInt(page) + 1};
     }
@@ -64,13 +65,13 @@ async function getAllByCategory(page = 0, category) {
 }
 
 async function getAllByKeyword(page = 0, keyword) {
-    const offset = helper.getOffset(page, config.listPerPage);
+    const offset = helper.getOffset(page, process.env.LIST_PER_PAGE);
     let rows = await db.query(`
         SELECT *
         FROM product
         WHERE name LIKE CONCAT('%', ?, '%')
         LIMIT ${offset}, ?`
-    , [keyword, (config.listPerPage + 1).toString()]);
+    , [keyword, (process.env.LIST_PER_PAGE + 1).toString()]);
     const data = helper.emptyOrRows(rows);
 
     for (item of data) {
@@ -84,7 +85,7 @@ async function getAllByKeyword(page = 0, keyword) {
     }
     
     /* Check if next page is empty */
-    if (data.length == config.listPerPage + 1) {
+    if (data.length == process.env.LIST_PER_PAGE + 1) {
         data.pop();
         return {data, next_paging: parseInt(page) + 1};
     }
@@ -137,7 +138,7 @@ async function getDetailByID(prod_id) {
 async function insert(body, files) {
     console.log(body);
     console.log(files);
-    const connection = await mysql.createConnection(config.db);
+    const connection = await mysql.createConnection(db.getConnection());
     await connection.beginTransaction();
     try {
         let result = await connection.query(`

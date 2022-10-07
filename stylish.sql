@@ -27,9 +27,9 @@ CREATE TABLE `des_img` (
   `des_id` int unsigned NOT NULL,
   `img_src` varchar(2083) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`img_id`),
-  KEY `des_id` (`des_id`),
-  CONSTRAINT `des_img_ibfk_1` FOREIGN KEY (`des_id`) REFERENCES `description` (`des_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  KEY `des_img_ibfk_1` (`des_id`),
+  CONSTRAINT `des_img_ibfk_1` FOREIGN KEY (`des_id`) REFERENCES `description` (`des_id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -55,10 +55,10 @@ CREATE TABLE `description` (
   `main` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `extra` text COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`des_id`),
-  KEY `prod_id` (`prod_id`),
+  KEY `description_ibfk_1` (`prod_id`),
   FULLTEXT KEY `body` (`main`,`extra`),
-  CONSTRAINT `description_ibfk_1` FOREIGN KEY (`prod_id`) REFERENCES `product` (`prod_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  CONSTRAINT `description_ibfk_1` FOREIGN KEY (`prod_id`) REFERENCES `product` (`prod_id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,7 +84,7 @@ CREATE TABLE `product` (
   `price` int unsigned NOT NULL,
   `category` varchar(15) NOT NULL,
   PRIMARY KEY (`prod_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,8 +93,35 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (1,'簡約素面下擺撞色休閒長袖衛衣',680,'m'),(2,'厚實毛呢格子外套',500,'w'),(3,'泡泡袖上衣綁帶背心洋裝套裝',810,'w'),(4,'半排釦針織背心洋裝',950,'w'),(5,'微笑標籤七分袖條紋大學T',720,'w'),(6,'燒花荷葉邊後釦褶縫上衣',550,'w'),(7,'百褶格紋褲裙',880,'w'),(8,'寬百褶後鬆緊腰長裙',950,'w'),(9,'優雅925銀珍珠耳環',1000,'a');
+INSERT INTO `product` VALUES (1,'簡約素面下擺撞色休閒長袖衛衣',680,'men'),(2,'厚實毛呢格子外套',500,'women'),(3,'泡泡袖上衣綁帶背心洋裝套裝',810,'women'),(4,'半排釦針織背心洋裝',950,'women'),(5,'微笑標籤七分袖條紋大學T',720,'women'),(6,'燒花荷葉邊後釦褶縫上衣',550,'women'),(7,'百褶格紋褲裙',880,'women'),(8,'寬百褶後鬆緊腰長裙',950,'women'),(9,'優雅925銀珍珠耳環',1000,'accessories');
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user` (
+  `user_id` int unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'test','$2a$08$jwqJwCkLln5I.0nXYOqole1W2n4oUuOrGahieNLNO/WY9KXwXuS0W','test@mail.com');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -112,9 +139,9 @@ CREATE TABLE `variant` (
   `stock` int unsigned NOT NULL,
   `img_src` varchar(2083) NOT NULL,
   PRIMARY KEY (`var_id`),
-  KEY `prod_id` (`prod_id`),
-  CONSTRAINT `variant_ibfk_1` FOREIGN KEY (`prod_id`) REFERENCES `product` (`prod_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `fk_prod_id` (`prod_id`),
+  CONSTRAINT `fk_prod_id` FOREIGN KEY (`prod_id`) REFERENCES `product` (`prod_id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -136,4 +163,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-02  2:08:19
+-- Dump completed on 2022-10-07 17:50:21
