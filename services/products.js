@@ -136,9 +136,7 @@ async function getDetailByID(prod_id) {
 }
 
 async function insert(body, files) {
-    console.log(body);
-    console.log(files);
-    const connection = await mysql.createConnection(db.getConnection());
+    const connection = await db.getConnection();
     await connection.beginTransaction();
     try {
         let result = await connection.query(`
@@ -167,7 +165,6 @@ async function insert(body, files) {
         const des_id = result[0].insertId;
         
         if (files.des_img && files.des_img.length > 0) {
-            console.log("des_img:", files.des_img, "des_img.length: ", files.des_img.length);
             for (let i = 0; i < files.des_img.length; ++i) {
                 result = await connection.query(`
                     INSERT INTO des_img
@@ -175,7 +172,6 @@ async function insert(body, files) {
                     VALUE
                     (?, ?)
                 `, [des_id, files.des_img[i].path]);
-                console.log(result);
             }
         }
 
